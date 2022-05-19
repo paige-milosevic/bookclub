@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.codingdojo.bookclub.models.Book;
 import com.codingdojo.bookclub.models.LoginUser;
 import com.codingdojo.bookclub.models.User;
-import com.codingdojo.bookclub.services.BookService;
+import com.codingdojo.bookclub.services.ShowService;
 import com.codingdojo.bookclub.services.UserService;
 
 @Controller
@@ -25,7 +25,7 @@ public class HomeController {
 	UserService userService;
 	
 	@Autowired
-	BookService bookService;
+	ShowService showService;
 	
 	// Get Requests
 	
@@ -37,36 +37,6 @@ public class HomeController {
 		return "Login.jsp";
 	}
 	
-	@GetMapping("/books")
-	public String dashboard(
-			Model model,
-			HttpSession session
-			) {
-		if (session.getAttribute("userId") == null) {
-			return "redirect:/";
-		} 
-		
-		model.addAttribute("books", bookService.allBooks());
-		model.addAttribute("user", userService.oneUser((Long)session.getAttribute("userId")));
-		
-		return "Dashboard.jsp";
-	}	
-	
-	@GetMapping("/books/new")
-	public String addBook(
-			@ModelAttribute("book") Book book,
-			Model model,
-			HttpSession session
-			) {
-		
-		if (session.getAttribute("userId") == null) {
-			return "redirect:/";
-		} 
-		
-		model.addAttribute("user", userService.oneUser((Long)session.getAttribute("userId")));
-		
-		return "NewBook.jsp";
-	}
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
@@ -93,7 +63,7 @@ public class HomeController {
 		}
 		
 		session.setAttribute("userId", user.getId());
-		return "redirect:/books";
+		return "redirect:/shows";
 		
 	}
 	
@@ -112,7 +82,7 @@ public class HomeController {
 		
 		session.setAttribute("userId", user.getId());
 		
-		return "redirect:/books";
+		return "redirect:/shows";
 		
 	}
 	

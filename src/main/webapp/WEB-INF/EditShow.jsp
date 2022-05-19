@@ -7,38 +7,43 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>ReadShare</title>
+	<title>Edit My Task</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 </head>
 <body>
 	<div class="container">
-		<div class="row justify-content-between">
-			<h1>Add a Book to Your Shelf!</h1>
-			<a href="/books">back to the shelves</a>
+		<div class="justify-content-between">
+			<h1><c:out value="${show.title}"></c:out></h1>
 		</div>
-		<div class="row">
-			<form:form action="/books/create" method="post" modelAttribute="book">
+		<div>
+			<form:form action="/shows/update/${show.id}" method="post" modelAttribute="show">
+				<input type="hidden" name="_method" value="put"/>
 				<div>
 					<form:errors path="title"/>
 					<form:label path="title">Title</form:label>
 					<form:input path="title" input="text"/>
 				</div>
 				<div>
-					<form:errors path="author"/>
-					<form:label path="author">Author</form:label>
-					<form:input path="author" input="text"/>
+					<form:errors path="network"/>
+					<form:label path="network">Network</form:label>
+					<form:input path="network" input="text"/>
 				</div>
 				<div>
-					<form:errors path="thoughts"/>
-					<form:label path="thoughts">Thoughts</form:label>
-					<form:textarea path="thoughts" input="text"/>
+					<form:errors path="description"/>
+					<form:label path="description">Description</form:label>
+					<form:textarea path="description" input="text"/>
 				</div>
 				<div>
 					<form:errors path="user"/>
 					<form:input type="hidden" path="user" value="${user.id}"/>
 				</div>
-				<button type="submit">Submit</button>
+				<a class="btn btn-light" href="/shows" role="button">Cancel</a>
+				<input class="btn btn-light" type="submit" values="Submit">
+
+			</form:form>
+			<form:form action="/shows/destroy/${show.id}" method="delete">
+				<button class="btn btn-danger">Delete</button>
 			</form:form>
 		</div>
 	</div>

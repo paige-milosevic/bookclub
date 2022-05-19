@@ -7,39 +7,44 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>ReadShare</title>
+	<title>Create a Task</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 </head>
 <body>
 	<div class="container">
-		<div class="row justify-content-between">
-			<h1>Change your Entry</h1>
-			<a href="/books">back to the shelves</a>
+		<div class="row justify-content-between align-items-center">
+			<h1>Create a New TV Show</h1>
 		</div>
 		<div class="row">
-			<form:form action="/books/update/${book.id}" method="post" modelAttribute="book">
-				<input type="hidden" name="_method" value="put"/>
+			<form:form action="/shows/create" method="post" modelAttribute="show">
 				<div>
-					<form:errors path="title"/>
+					<div class="text-danger">
+						<form:errors path="title"/>
+					</div>
 					<form:label path="title">Title</form:label>
 					<form:input path="title" input="text"/>
 				</div>
 				<div>
-					<form:errors path="author"/>
-					<form:label path="author">Author</form:label>
-					<form:input path="author" input="text"/>
+					<div class="text-danger">
+						<form:errors path="network"/>
+					</div>
+					<form:label path="network">Network</form:label>
+					<form:input path="network" input="text"/>
 				</div>
 				<div>
-					<form:errors path="thoughts"/>
-					<form:label path="thoughts">Thoughts</form:label>
-					<form:textarea path="thoughts" input="text"/>
+					<div class="text-danger">
+						<form:errors path="description"/>
+					</div>
+					<form:label path="description">Description</form:label>
+					<form:textarea path="description" input="text"/>
 				</div>
 				<div>
 					<form:errors path="user"/>
 					<form:input type="hidden" path="user" value="${user.id}"/>
 				</div>
-				<button type="submit">Submit</button>
+				<a class="btn btn-light" href="/shows" role="button">Cancel</a>
+				<input class="btn btn-light" type="submit" values="Submit">
 			</form:form>
 		</div>
 	</div>
